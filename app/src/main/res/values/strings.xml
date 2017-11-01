@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RandomUsers</string>
+    <string name="lbl_get_user_btn">Get User</string>
+</resources>
