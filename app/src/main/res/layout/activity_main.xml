@@ -8,12 +8,31 @@
     android:layout_height="match_parent"
     tools:context="com.example.jonathanmaldonado.randomusers.ui.main.MainActivity">
 
+    <ImageView
+        android:src="@drawable/placeholder"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
     <TextView
+        android:textSize="24sp"
         android:id="@+id/user_name_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Name: "
          />
+    <TextView
+        android:textSize="24sp"
+        android:id="@+id/user_Address_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address: "
+        />
+    <TextView
+        android:textSize="24sp"
+        android:id="@+id/user_email_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email: "
+        />
     <Button
         android:onClick="getNewUser"
         android:text="@string/lbl_get_user_btn"
