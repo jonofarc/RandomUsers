@@ -1,6 +1,7 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 
@@ -34,14 +35,10 @@ public class MainPresenter implements MainContract.Presenter {
         new Thread(new Runnable() {
             @Override
             public void run () {
-               
+
 
                 try {
-                    randomusers[0] =mainModel.getUserData();
-                    Log.d(TAG, "run: "+ randomusers[0].getResults().get(0).getName().getFirst().toString());
-
-
-
+                    mainModel.getUserData();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -50,7 +47,13 @@ public class MainPresenter implements MainContract.Presenter {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run () {
-                        mainView.updateMainProfile(randomusers[0].getResults().get(1).getName().getFirst().toString());
+                        Log.d(TAG, "run: "+mainModel.getName()+mainModel.getAddress()+mainModel.getEmail());
+                        String name=mainModel.getName();
+                        String address=mainModel.getAddress();
+                        String email=mainModel.getEmail();
+                        Bitmap bmp = mainModel.getBMP();
+
+                        mainView.updateMainProfile(bmp,name,address, email);
                     }
                 });
             }

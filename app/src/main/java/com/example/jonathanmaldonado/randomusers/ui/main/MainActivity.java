@@ -1,9 +1,11 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jonathanmaldonado.randomusers.R;
@@ -11,19 +13,30 @@ import com.example.jonathanmaldonado.randomusers.R;
 public class MainActivity extends AppCompatActivity implements MainContract.View {
     final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";
     MainPresenter mainPresenter;
+    ImageView profilePictureIV;
     TextView userNameTV;
+    TextView userAddressTV;
+    TextView userEmailTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         userNameTV = (TextView) findViewById(R.id.user_name_tv);
+        userAddressTV = (TextView) findViewById(R.id.user_Address_tv);
+        userEmailTV = (TextView) findViewById(R.id.user_email_tv);
+        profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
         mainPresenter= new MainPresenter(this);
-        userNameTV.setText("jan");
+
     }
 
-    public void updateMainProfile(String name){
+    public void updateMainProfile(Bitmap bmp ,String name, String address, String email){
         Log.d(TAG, "updateMainProfile: updating the name------");
         userNameTV.setText(name);
+        userAddressTV.setText(address);
+        userEmailTV.setText(email);
+        profilePictureIV.setImageBitmap(bmp);
     }
 
     public void getNewUser(View view) {

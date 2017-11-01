@@ -1,5 +1,7 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
+import android.graphics.Bitmap;
+
 import com.example.jonathanmaldonado.randomusers.data.RandomUsers;
 
 import retrofit2.Call;
@@ -12,7 +14,7 @@ import retrofit2.http.GET;
 public interface MainContract {
 
     interface View{
-        void updateMainProfile(String name);
+        void updateMainProfile(Bitmap bmp, String name, String address, String email);
     }
     interface Presenter{
 

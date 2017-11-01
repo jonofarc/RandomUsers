@@ -9,9 +9,11 @@
     tools:context="com.example.jonathanmaldonado.randomusers.ui.main.MainActivity">
 
     <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/profile_picture_iv"
         android:src="@drawable/placeholder"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
     <TextView
         android:textSize="24sp"
         android:id="@+id/user_name_tv"
@@ -34,6 +36,7 @@
         android:text="Email: "
         />
     <Button
+        android:layout_marginTop="10dp"
         android:onClick="getNewUser"
         android:text="@string/lbl_get_user_btn"
         android:layout_width="match_parent"
