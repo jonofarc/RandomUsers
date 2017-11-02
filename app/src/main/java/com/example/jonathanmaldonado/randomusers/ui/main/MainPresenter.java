@@ -1,13 +1,16 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 
 import com.example.jonathanmaldonado.randomusers.data.RandomUsers;
+import com.example.jonathanmaldonado.randomusers.data.Result;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Jonathan Maldonado on 10/31/2017.
@@ -23,6 +26,7 @@ public class MainPresenter implements MainContract.Presenter {
     public MainPresenter(MainContract.View mainView) {
         this.mainView = mainView;
         mainModel = new MainModel();
+        mainModel.setContext(mainView.getContext());
     }
 
 
@@ -60,10 +64,18 @@ public class MainPresenter implements MainContract.Presenter {
         }).start();
 
 
-        //mainView.updateMainProfile("Jon");
+
 
     }
 
+    @Override
+    public void saveUser() {
+        List<Result> randomUserResults=mainModel.getRandomUserResults();
+
+
+
+
+    }
 
 
 }

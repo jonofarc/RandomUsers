@@ -41,5 +41,17 @@
         android:text="@string/lbl_get_user_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="10dp"
+        android:onClick="saveUser"
+        android:text="save users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginTop="10dp"
+        android:onClick="viewUsers"
+        android:text="view saved users"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

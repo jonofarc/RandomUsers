@@ -1,5 +1,6 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 
 import com.example.jonathanmaldonado.randomusers.data.RandomUsers;
@@ -15,11 +16,15 @@ public interface MainContract {
 
     interface View{
         void updateMainProfile(Bitmap bmp, String name, String address, String email);
+
+
+        Context getContext();
     }
     interface Presenter{
 
 
         void getRandomUser();
+        void saveUser();
 
     }
 

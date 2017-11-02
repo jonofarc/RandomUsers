@@ -1,11 +1,18 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.jonathanmaldonado.randomusers.DataBase.DBHelper;
+import com.example.jonathanmaldonado.randomusers.DataBase.FeedReaderContract;
 import com.example.jonathanmaldonado.randomusers.data.Name;
 import com.example.jonathanmaldonado.randomusers.data.RandomUsers;
 import com.example.jonathanmaldonado.randomusers.data.Result;
@@ -13,6 +20,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -31,6 +41,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainModel {
 
+    private DBHelper helper;
+    private SQLiteDatabase database;
+
     private List<Result> randomUserResults;
 
     private Bitmap imageBitMap;
@@ -38,6 +51,7 @@ public class MainModel {
     private String fullName;
     private String fullAddress;
     private String fullEmail;
+    private Context context;
 
     final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";
     private String BASE_URL="https://randomuser.me/api/";
@@ -46,6 +60,9 @@ public class MainModel {
     public void getUserData() throws IOException {
 
         okhttpget();
+    }
+    public void setContext(Context ctx){
+        context=ctx;
     }
 
     public void okhttpget() throws IOException {
@@ -119,7 +136,83 @@ public class MainModel {
     public Bitmap getBMP(){
         return imageBitMap;
     }
+    public List<Result> getRandomUserResults(){
 
+        helper = new DBHelper(context);
+        database = helper.getWritableDatabase();
+
+        if(randomUserResults.size()<0){
+
+            //TODO add no user logic
+
+        }else{
+
+
+            byte[] imageBitsArray=getBytes(imageBitMap);
+
+
+
+
+            ContentValues values= new ContentValues();
+
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME,fullName);
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_ADDRESS,fullAddress);
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL,fullEmail);
+            values.put(FeedReaderContract.FeedEntry.COLUMN_NAME_PICTURE_IMAGE,imageBitsArray);
+            long recordId = database.insert(FeedReaderContract.FeedEntry.TABLE_NAME,null,values);
+
+            saveToInternalStorage(imageBitMap,fullName+".jpg");
+            if (recordId>0){
+                 Log.d(TAG, "Record Saved");
+                //show if save was succesfull
+                //  saveNoteResult.setText("");
+                //alertTV.setText("User Saved: "+" \nAlias: "+ alias+" \nName: "+ originalFullName+ " \nAddress: "+ originalAddress+" \nEmail: "+ originalEmail+ " \npictureImage: "+ pictureImage);
+
+            }
+
+
+        }
+
+
+        return randomUserResults;
+    }
+    public static byte[] getBytes(Bitmap bitmap) {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage, String imageName){
+        ContextWrapper cw = new ContextWrapper(context);
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+        //
+        // Create imageDir
+        File mypath=new File(directory,imageName);
+        Toast.makeText(cw, mypath.getPath().toString(), Toast.LENGTH_SHORT).show();
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
 
 
 }
+
+
+
+
+

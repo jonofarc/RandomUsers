@@ -1,5 +1,7 @@
 package com.example.jonathanmaldonado.randomusers.ui.main;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jonathanmaldonado.randomusers.DataBase.DBHelper;
 import com.example.jonathanmaldonado.randomusers.R;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
@@ -18,16 +21,24 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     TextView userAddressTV;
     TextView userEmailTV;
 
+    private DBHelper helper;
+    private SQLiteDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        helper = new DBHelper(this);
+        database = helper.getWritableDatabase();
 
         userNameTV = (TextView) findViewById(R.id.user_name_tv);
         userAddressTV = (TextView) findViewById(R.id.user_Address_tv);
         userEmailTV = (TextView) findViewById(R.id.user_email_tv);
         profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
         mainPresenter= new MainPresenter(this);
+
+        mainPresenter.getRandomUser();
 
     }
 
@@ -39,7 +50,16 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         profilePictureIV.setImageBitmap(bmp);
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
     public void getNewUser(View view) {
         mainPresenter.getRandomUser();
+    }
+
+    public void saveUser(View view) {
+        mainPresenter.saveUser();
     }
 }
