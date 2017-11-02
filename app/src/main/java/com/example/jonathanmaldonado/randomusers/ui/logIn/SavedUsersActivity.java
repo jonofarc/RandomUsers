@@ -1,5 +1,6 @@
 package com.example.jonathanmaldonado.randomusers.ui.logIn;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,5 +24,10 @@ public class SavedUsersActivity extends AppCompatActivity implements SavedUsersC
     @Override
     public void displayUsers(String name) {
         savedUsersTV.setText(name);
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

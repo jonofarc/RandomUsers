@@ -12,7 +12,7 @@ public interface SavedUsersContract {
         void displayUsers(String name);
 
 
-
+        Context getContext();
     }
     interface Presenter{
 

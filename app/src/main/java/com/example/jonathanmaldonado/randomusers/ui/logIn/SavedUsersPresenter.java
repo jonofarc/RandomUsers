@@ -13,6 +13,7 @@ public class SavedUsersPresenter implements SavedUsersContract.Presenter {
     public SavedUsersPresenter(SavedUsersContract.View savedUsersView) {
         this.savedUsersView = savedUsersView;
         savedUsersModel=new SavedUsersModel();
+        savedUsersModel.setContext(savedUsersView.getContext());
     }
 
     @Override
