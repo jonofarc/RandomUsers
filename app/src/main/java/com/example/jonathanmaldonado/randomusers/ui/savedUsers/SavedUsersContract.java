@@ -1,7 +1,10 @@
-package com.example.jonathanmaldonado.randomusers.ui.logIn;
+package com.example.jonathanmaldonado.randomusers.ui.savedUsers;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+
+import com.example.jonathanmaldonado.randomusers.data.SavedUser;
+
+import java.util.List;
 
 /**
  * Created by Jonathan Maldonado on 11/1/2017.
@@ -10,7 +13,7 @@ import android.graphics.Bitmap;
 public interface SavedUsersContract {
     interface View{
         void displayUsers(String name);
-
+        void setRecyclerView(List<SavedUser> mDataset);
 
         Context getContext();
     }

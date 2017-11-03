@@ -1,0 +1,50 @@
+package com.example.jonathanmaldonado.randomusers.data;
+
+import android.graphics.Bitmap;
+
+import java.util.List;
+
+/**
+ * Created by Jonathan Maldonado on 11/2/2017.
+ */
+
+public class SavedUser {
+
+
+    Bitmap bmp;
+    String name;
+    String email;
+    String address;
+    public void setBmp(Bitmap bmp) {
+        this.bmp = bmp;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+        // etc
+
+    /*
+    List<Bitmap> bmp;
+    List <String> name;
+    List <String> email;
+    List <String> address;
+    public void setBmp(List<Bitmap> bmp) {
+        this.bmp = bmp;
+    }
+    public void setName(List <String> name) {
+        this.name = name;
+    }
+    public void setEmail(List <String> email) {
+        this.email = email;
+    }
+    public void setAddress(List <String> address) {
+        this.address = address;
+    }
+    */
+}

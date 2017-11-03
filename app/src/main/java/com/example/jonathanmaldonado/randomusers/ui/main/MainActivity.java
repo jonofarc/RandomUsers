@@ -6,15 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jonathanmaldonado.randomusers.DataBase.DBHelper;
+import com.example.jonathanmaldonado.randomusers.db.DBHelper;
 import com.example.jonathanmaldonado.randomusers.R;
-import com.example.jonathanmaldonado.randomusers.ui.logIn.SavedUsersActivity;
+import com.example.jonathanmaldonado.randomusers.ui.savedUsers.SavedUsersActivity;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
     final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";

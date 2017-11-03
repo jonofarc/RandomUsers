@@ -1,4 +1,4 @@
-package com.example.jonathanmaldonado.randomusers.ui.logIn;
+package com.example.jonathanmaldonado.randomusers.ui.savedUsers;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,20 +6,24 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jonathanmaldonado.randomusers.DataBase.DBHelper;
-import com.example.jonathanmaldonado.randomusers.DataBase.FeedReaderContract;
+import com.example.jonathanmaldonado.randomusers.R;
+import com.example.jonathanmaldonado.randomusers.data.SavedUser;
+import com.example.jonathanmaldonado.randomusers.db.DBHelper;
+import com.example.jonathanmaldonado.randomusers.db.FeedReaderContract;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Jonathan Maldonado on 11/1/2017.
@@ -30,54 +34,35 @@ public class SavedUsersModel {
     private DBHelper helper;
     private SQLiteDatabase database;
 
+
+
     private Context context;
     public void setContext(Context ctx){
         context=ctx;
     }
 
-    public String readUsers(){
+
+
+    public List<SavedUser> readUsers(){
 
         helper = new DBHelper(context);
         database = helper.getWritableDatabase();
-        String message="No data found";
+        List<SavedUser> message=null;
         try {
             message=retriveUser();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return message;
     }
 
-    private String retriveUser () throws IOException {
 
 
-        /*// example
 
-        String[] tableColumns = new String[] {
-            "column1",
-            "(SELECT max(column1) FROM table2) AS max"
-        };
-        String whereClause = "column1 = ? OR column1 = ?";
-        String[] whereArgs = new String[] {
-            "value1",
-            "value2"
-        };
-        String orderBy = "column1";
+    private List<SavedUser> retriveUser () throws IOException {
 
-        Cursor c = sqLiteDatabase.query(
-            "table1",
-            tableColumns,
-            whereClause,
-            whereArgs,
-            null,
-            null,
-            orderBy
-         );
 
-        // since we have a named column we can do
-        int idx = c.getColumnIndex("max");
-
-         */
 
         String[] projection={
                 FeedReaderContract.FeedEntry._ID,
@@ -94,7 +79,7 @@ public class SavedUsersModel {
 
         String sortOtder = FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME+"DESC";
 
-        //we check if there was a message we apply filters else we send null
+
         String whereClause;
         String[] whereArgs;
 
@@ -114,7 +99,8 @@ public class SavedUsersModel {
 
 
         cursor.getCount();
-        String newMessage="";
+
+        List<SavedUser> myResults = new ArrayList<SavedUser>();
 
         if(cursor.getCount()>0){
             Toast.makeText(context, "retriving users", Toast.LENGTH_SHORT).show();
@@ -124,95 +110,39 @@ public class SavedUsersModel {
         }
         while (cursor.moveToNext()){
 
-
+            /*
             long entryID =cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
             String entryAlias=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ALIAS));
             String entryFullName=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME));
             String entryAddress=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ADDRESS));
             String entryEmail=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL));
             byte[] entryPictureImage=cursor.getBlob(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_PICTURE_IMAGE));
-
-
-
-
-
-            newMessage += "User ID: "+ entryID+" \n Alias: "+ entryAlias+ " \n Full Name: "+ entryFullName+ " \n Address "+entryAddress+" \n Email "+entryEmail+" \n Picture URL "+entryPictureImage+"\n";
-
-            /*
-            Bitmap bmp = getImage(entryPictureImage);
-
-            // Create fields where we will show our information
-            LinearLayout searchLinearLayout=(LinearLayout) this.findViewById(R.id.searchActivityLayout);
-            LinearLayout.LayoutParams tv_params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-
-            );
-            LinearLayout.LayoutParams iv_params = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-
-            );
-            TextView tv;
-            ImageView iv;
-
-            iv=new ImageView(this);
-            StringBuilder imageDir = new StringBuilder();
-            imageDir.append(getApplicationInfo().dataDir+"/app_imageDir/");
-            Bitmap IMbmp = loadImageFromStorage(imageDir.toString(),(entryAlias+".jpg"));
-
-
-            //convert from DP to Pixels as I am unable to find other way to assign height in dp
-            iv_params.height=pixelsToDp(250);
-            iv_params.topMargin=pixelsToDp(50);
-            iv.setLayoutParams(iv_params);
-            // check if there is image on device internal memory if not we load from database
-            if(IMbmp==null){
-                iv.setImageBitmap(bmp);
-            }else{
-                iv.setImageBitmap(IMbmp);
-            }
-
-            searchLinearLayout.addView(iv);
-
-            tv=new TextView(context);
-            tv.setLayoutParams(tv_params);
-            tv.setTextAppearance(context, android.R.style.TextAppearance_Large);
-            tv.setText("ID: "+entryID);
-            searchLinearLayout.addView(tv);
-
-            tv=new TextView(context);
-            tv.setLayoutParams(tv_params);
-            tv.setTextAppearance(context, android.R.style.TextAppearance_Large);
-            tv.setText("Alias: "+entryAlias);
-            searchLinearLayout.addView(tv);
-
-            tv=new TextView(context);
-            tv.setLayoutParams(tv_params);
-            tv.setTextAppearance(context, android.R.style.TextAppearance_Large);
-            tv.setText("Full Name: "+entryFullName);
-            searchLinearLayout.addView(tv);
-
-            tv=new TextView(context);
-            tv.setLayoutParams(tv_params);
-            tv.setTextAppearance(context, android.R.style.TextAppearance_Large);
-            tv.setText("Address: "+entryAddress);
-            searchLinearLayout.addView(tv);
-
-            tv=new TextView(context);
-            tv.setLayoutParams(tv_params);
-            tv.setTextAppearance(context, android.R.style.TextAppearance_Large);
-            tv.setText("Email: "+entryEmail);
-            searchLinearLayout.addView(tv);
             */
 
 
+            //newMessage += "User ID: "+ entryID+" \n Alias: "+ entryAlias+ " \n Full Name: "+ entryFullName+ " \n Address "+entryAddress+" \n Email "+entryEmail+" \n Picture URL "+entryPictureImage+"\n";
 
+            SavedUser savedUser= new SavedUser();
+
+            String entryFullName=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME));
+            String entryAddress=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ADDRESS));
+            String entryEmail=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL));
+
+            StringBuilder imageDir = new StringBuilder();
+            imageDir.append(context.getApplicationInfo().dataDir+"/app_imageDir/");
+            Bitmap bmp = loadImageFromStorage(imageDir.toString(),(entryFullName+".jpg"));
+
+
+            savedUser.setName(entryFullName.toString());
+            savedUser.setBmp(bmp);
+            savedUser.setEmail(entryEmail.toString());
+            savedUser.setAddress(entryAddress);
+            myResults.add(savedUser);
 
         }
 
 
-        return newMessage;
+        return myResults;
         //alertTV.setText(newMessage);
 
     }

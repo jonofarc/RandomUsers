@@ -1,10 +1,10 @@
-package com.example.jonathanmaldonado.randomusers.DataBase;
+package com.example.jonathanmaldonado.randomusers.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.jonathanmaldonado.randomusers.DataBase.FeedReaderContract.FeedEntry;
+import com.example.jonathanmaldonado.randomusers.db.FeedReaderContract.FeedEntry;
 
 
 /**

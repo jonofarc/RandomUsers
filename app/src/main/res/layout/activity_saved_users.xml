@@ -6,7 +6,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jonathanmaldonado.randomusers.ui.logIn.SavedUsersActivity">
+    tools:context="com.example.jonathanmaldonado.randomusers.ui.savedUsers.SavedUsersActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/myRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/saved_users_result_tv"

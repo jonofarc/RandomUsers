@@ -1,4 +1,4 @@
-package com.example.jonathanmaldonado.randomusers.DataBase;
+package com.example.jonathanmaldonado.randomusers.db;
 
 import android.provider.BaseColumns;
 

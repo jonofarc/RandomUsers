@@ -6,14 +6,11 @@ import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.jonathanmaldonado.randomusers.DataBase.DBHelper;
-import com.example.jonathanmaldonado.randomusers.DataBase.FeedReaderContract;
-import com.example.jonathanmaldonado.randomusers.data.Name;
+import com.example.jonathanmaldonado.randomusers.db.DBHelper;
+import com.example.jonathanmaldonado.randomusers.db.FeedReaderContract;
 import com.example.jonathanmaldonado.randomusers.data.RandomUsers;
 import com.example.jonathanmaldonado.randomusers.data.Result;
 import com.google.gson.Gson;
@@ -27,13 +24,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Jonathan Maldonado on 10/31/2017.

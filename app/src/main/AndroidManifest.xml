@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.logIn.SavedUsersActivity"></activity>
+        <activity android:name=".ui.savedUsers.SavedUsersActivity" />
+        <activity android:name=".ui.userDetails.UserDetailsActivity"></activity>
     </application>
 
 </manifest>
