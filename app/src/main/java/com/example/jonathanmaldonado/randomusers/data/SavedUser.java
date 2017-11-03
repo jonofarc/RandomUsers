@@ -27,6 +27,18 @@ public class SavedUser {
     public void setAddress(String address) {
         this.address = address;
     }
+    public Bitmap getBmp() {
+        return bmp;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getAddress() {
+        return address;
+    }
         // etc
 
     /*

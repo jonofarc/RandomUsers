@@ -3,6 +3,7 @@ package com.example.jonathanmaldonado.randomusers.data;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,11 @@ import java.util.List;
  */
 
 public class SavedUsersRecyclerViewAdapter extends RecyclerView.Adapter <SavedUsersRecyclerViewAdapter.ViewHolder> {
-    public static final String SAVED_USER_RECYCLER_VIEW_EXTRA="com.example.jonathanmaldonado.randomusers.data.SAVED_USER_RECYCLER_VIEW_EXTRA";
+    public static final String SAVED_USER_RECYCLER_VIEW_EXTRA_BMP="com.example.jonathanmaldonado.randomusers.data.SAVED_USER_RECYCLER_VIEW_EXTRA_BMP";
+    public static final String SAVED_USER_RECYCLER_VIEW_EXTRA_NAME="com.example.jonathanmaldonado.randomusers.data.SAVED_USER_RECYCLER_VIEW_EXTRA_NAME";
+    public static final String SAVED_USER_RECYCLER_VIEW_EXTRA_ADDRESS="com.example.jonathanmaldonado.randomusers.data.SAVED_USER_RECYCLER_VIEW_EXTRA_ADDRESS";
+    public static final String SAVED_USER_RECYCLER_VIEW_EXTRA_EMAIL="com.example.jonathanmaldonado.randomusers.data.SAVED_USER_RECYCLER_VIEW_EXTRA_EMAIL";
+
     private List<SavedUser> mDataset;
     Context mContext;
 
@@ -32,14 +37,21 @@ public class SavedUsersRecyclerViewAdapter extends RecyclerView.Adapter <SavedUs
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
 
-        holder.TV_name.setText(mDataset.get(position).name);
-        holder.IV_userImage.setImageBitmap(mDataset.get(position).bmp);
+        holder.TV_name.setText(mDataset.get(position).getName());
+        holder.IV_userImage.setImageBitmap(mDataset.get(position).getBmp());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+
                 Intent intent=new Intent(mContext, UserDetailsActivity.class);
-                intent.putExtra(SAVED_USER_RECYCLER_VIEW_EXTRA, mDataset.get(position).getClass());
+                intent.putExtra(SAVED_USER_RECYCLER_VIEW_EXTRA_BMP, mDataset.get(position).getBmp());
+                intent.putExtra(SAVED_USER_RECYCLER_VIEW_EXTRA_NAME, mDataset.get(position).getName());
+                intent.putExtra(SAVED_USER_RECYCLER_VIEW_EXTRA_ADDRESS, mDataset.get(position).getAddress());
+                intent.putExtra(SAVED_USER_RECYCLER_VIEW_EXTRA_EMAIL, mDataset.get(position).getEmail());
                 mContext. startActivity(intent);
 
             }
