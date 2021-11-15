@@ -12,16 +12,13 @@ import java.util.List;
 
 public interface SavedUsersContract {
     interface View{
-        void displayUsers(String name);
+
         void setRecyclerView(List<SavedUser> mDataset);
 
         Context getContext();
+        
     }
     interface Presenter{
-
-
         void getSavedUsers();
-
-
     }
 }

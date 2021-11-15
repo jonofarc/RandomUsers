@@ -28,15 +28,11 @@ public class SavedUsersActivity extends AppCompatActivity implements SavedUsersC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_users);
         savedUsersPresenter = new SavedUsersPresenter(this);
-        savedUsersTV = (TextView) findViewById(R.id.saved_users_result_tv);
+
         savedUsersPresenter.getSavedUsers();
 
     }
 
-    @Override
-    public void displayUsers(String name) {
-        savedUsersTV.setText(name);
-    }
 
     @Override
     public Context getContext() {

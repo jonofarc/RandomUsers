@@ -94,7 +94,7 @@ public class SavedUsersModel {
         List<SavedUser> myResults = new ArrayList<SavedUser>();
 
         if (cursor.getCount() > 0) {
-            Toast.makeText(context, "retriving users", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "retriving users", Toast.LENGTH_SHORT).show();
         } else {
             Log.d(TAG, "retriveUser: No users found");
 

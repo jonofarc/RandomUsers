@@ -179,7 +179,7 @@ public class MainModel {
         //
         // Create imageDir
         File mypath=new File(directory,imageName);
-        Toast.makeText(cw, mypath.getPath().toString(), Toast.LENGTH_SHORT).show();
+
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(mypath);
