@@ -27,7 +27,7 @@
                  />
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_marginLeft="130dp"
+                android:layout_marginStart="130dp"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -35,9 +35,9 @@
                 <TextView
                     android:layout_marginTop="10dp"
                     android:id="@+id/user_name_tv"
-                    android:textSize="30sp"
+                    android:textSize="24sp"
                     android:textStyle="bold"
-                    android:text="Name:"
+                    android:text="@string/name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

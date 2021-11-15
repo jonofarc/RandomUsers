@@ -47,7 +47,7 @@ public class MainModel {
     private Context context;
 
     final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";
-    private String BASE_URL="https://randomuser.me/api/";
+    private final String BASE_URL="https://randomuser.me/api/";
     OkHttpClient client;
 
     public void getUserData() throws IOException {
@@ -78,12 +78,11 @@ public class MainModel {
 
 
                 StringBuilder nameBuilder = new StringBuilder();
-                nameBuilder.append("Full Name: " + randomUserResults.get(currentRandomUserIndex).getName().getFirst().toString() + " " + randomUserResults.get(currentRandomUserIndex).getName().getLast().toString());
+                nameBuilder.append(randomUserResults.get(currentRandomUserIndex).getName().getFirst().toString() + " " + randomUserResults.get(currentRandomUserIndex).getName().getLast().toString());
                 fullName = nameBuilder.toString();
 
                 //build the user address
                 StringBuilder addressBuilder = new StringBuilder();
-                addressBuilder.append("Address: ");
                 addressBuilder.append(randomUserResults.get(currentRandomUserIndex).getLocation().getStreet().getName() + " ");
                 addressBuilder.append(randomUserResults.get(currentRandomUserIndex).getLocation().getCity() + " ");
                 addressBuilder.append(randomUserResults.get(currentRandomUserIndex).getLocation().getState() + " ");
@@ -92,7 +91,7 @@ public class MainModel {
 
 
                 StringBuilder emailBuilder = new StringBuilder();
-                emailBuilder.append("Email: " + randomUserResults.get(currentRandomUserIndex).getEmail().toString());
+                emailBuilder.append(randomUserResults.get(currentRandomUserIndex).getEmail().toString());
                 fullEmail = emailBuilder.toString();
 
 
@@ -157,10 +156,6 @@ public class MainModel {
             saveToInternalStorage(imageBitMap,fullName+".jpg");
             if (recordId>0){
                  Log.d(TAG, "Record Saved");
-                //show if save was succesfull
-                //  saveNoteResult.setText("");
-                //alertTV.setText("User Saved: "+" \nAlias: "+ alias+" \nName: "+ originalFullName+ " \nAddress: "+ originalAddress+" \nEmail: "+ originalEmail+ " \npictureImage: "+ pictureImage);
-
             }
 
 
