@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jonathanmaldonado.randomusers.ui.savedUsers.SavedUsersActivity">
+    tools:context="com.jonofarc.randomusers.com.jonathanmaldonado.randomusers.ui.savedUsers.SavedUsersActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView

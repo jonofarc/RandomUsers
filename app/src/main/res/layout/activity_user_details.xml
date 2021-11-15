@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jonathanmaldonado.randomusers.ui.userDetails.UserDetailsActivity">
+    tools:context="com.jonofarc.randomusers.com.jonathanmaldonado.randomusers.ui.userDetails.UserDetailsActivity">
 
     <ImageView
         android:layout_gravity="center"

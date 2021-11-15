@@ -1,4 +1,4 @@
-package com.example.jonathanmaldonado.randomusers;
+package com.jonofarc.randomusers;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.jonathanmaldonado.randomusers", appContext.getPackageName());
+        assertEquals("com.jonofarc.randomusers", appContext.getPackageName());
     }
 }

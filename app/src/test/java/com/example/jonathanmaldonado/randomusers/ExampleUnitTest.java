@@ -1,4 +1,4 @@
-package com.example.jonathanmaldonado.randomusers;
+package com.jonofarc.randomusers;
 
 import org.junit.Test;
 

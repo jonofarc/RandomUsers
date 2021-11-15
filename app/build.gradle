@@ -4,7 +4,7 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.example.jonathanmaldonado.randomusers"
+        applicationId "com.jonofarc.randomusers"
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 1
