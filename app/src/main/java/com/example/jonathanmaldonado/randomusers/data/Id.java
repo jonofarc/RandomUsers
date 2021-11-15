@@ -1,8 +1,10 @@
 
 package com.example.jonathanmaldonado.randomusers.data;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
 
 public class Id {
 
@@ -11,7 +13,7 @@ public class Id {
     private String name;
     @SerializedName("value")
     @Expose
-    private String value;
+    private Object value;
 
     public String getName() {
         return name;
@@ -21,11 +23,11 @@ public class Id {
         this.name = name;
     }
 
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 

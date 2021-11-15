@@ -1,11 +1,16 @@
 
 package com.example.jonathanmaldonado.randomusers.data;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+
 public class Login {
 
+    @SerializedName("uuid")
+    @Expose
+    private String uuid;
     @SerializedName("username")
     @Expose
     private String username;
@@ -24,6 +29,14 @@ public class Login {
     @SerializedName("sha256")
     @Expose
     private String sha256;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public String getUsername() {
         return username;

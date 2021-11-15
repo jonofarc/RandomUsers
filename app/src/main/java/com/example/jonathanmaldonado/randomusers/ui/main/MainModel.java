@@ -71,7 +71,7 @@ public class MainModel {
             randomUser = gson.fromJson(resp, RandomUsers.class);
 
             randomUserResults = randomUser.getResults();
-            // mainResultTV.setText(GResults.get(0).getName().toString());
+
             for (int i = 0; i < randomUserResults.size(); i++) {
                 final int currentRandomUserIndex = i;
                 Log.d(TAG, "onResponse for: " + randomUserResults.get(currentRandomUserIndex).getName().getFirst().toString());
