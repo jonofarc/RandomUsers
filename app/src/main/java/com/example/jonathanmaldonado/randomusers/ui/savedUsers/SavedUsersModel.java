@@ -6,14 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.jonathanmaldonado.randomusers.R;
 import com.example.jonathanmaldonado.randomusers.data.SavedUser;
 import com.example.jonathanmaldonado.randomusers.db.DBHelper;
 import com.example.jonathanmaldonado.randomusers.db.FeedReaderContract;
@@ -30,26 +26,24 @@ import java.util.List;
  */
 
 public class SavedUsersModel {
-    private static final String TAG = SavedUsersModel.class.getSimpleName()+"_TAG";
-    private DBHelper helper;
+    private static final String TAG = SavedUsersModel.class.getSimpleName() + "_TAG";
     private SQLiteDatabase database;
 
 
-
     private Context context;
-    public void setContext(Context ctx){
-        context=ctx;
+
+    public void setContext(Context ctx) {
+        context = ctx;
     }
 
 
+    public List<SavedUser> readUsers() {
 
-    public List<SavedUser> readUsers(){
-
-        helper = new DBHelper(context);
+        DBHelper helper = new DBHelper(context);
         database = helper.getWritableDatabase();
-        List<SavedUser> message=null;
+        List<SavedUser> message = null;
         try {
-            message=retriveUser();
+            message = retriveUser();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,13 +52,10 @@ public class SavedUsersModel {
     }
 
 
+    private List<SavedUser> retriveUser() throws IOException {
 
 
-    private List<SavedUser> retriveUser () throws IOException {
-
-
-
-        String[] projection={
+        String[] projection = {
                 FeedReaderContract.FeedEntry._ID,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_ALIAS,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME,
@@ -72,12 +63,12 @@ public class SavedUsersModel {
                 FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL,
                 FeedReaderContract.FeedEntry.COLUMN_NAME_PICTURE_IMAGE
         };
-        String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_ALIAS+"= ?";
+        String selection = FeedReaderContract.FeedEntry.COLUMN_NAME_ALIAS + "= ?";
         String[] selectionArg = {
                 "Record title"
         };
 
-        String sortOtder = FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME+"DESC";
+        String sortOtder = FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME + "DESC";
 
 
         String whereClause;
@@ -102,13 +93,13 @@ public class SavedUsersModel {
 
         List<SavedUser> myResults = new ArrayList<SavedUser>();
 
-        if(cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             Toast.makeText(context, "retriving users", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
             Log.d(TAG, "retriveUser: No users found");
 
         }
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
 
             /*
             long entryID =cursor.getLong(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry._ID));
@@ -122,15 +113,15 @@ public class SavedUsersModel {
 
             //newMessage += "User ID: "+ entryID+" \n Alias: "+ entryAlias+ " \n Full Name: "+ entryFullName+ " \n Address "+entryAddress+" \n Email "+entryEmail+" \n Picture URL "+entryPictureImage+"\n";
 
-            SavedUser savedUser= new SavedUser();
+            SavedUser savedUser = new SavedUser();
 
-            String entryFullName=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME));
-            String entryAddress=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ADDRESS));
-            String entryEmail=cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL));
+            String entryFullName = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_FULL_NAME));
+            String entryAddress = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_ADDRESS));
+            String entryEmail = cursor.getString(cursor.getColumnIndexOrThrow(FeedReaderContract.FeedEntry.COLUMN_NAME_EMAIL));
 
             StringBuilder imageDir = new StringBuilder();
-            imageDir.append(context.getApplicationInfo().dataDir+"/app_imageDir/");
-            Bitmap bmp = loadImageFromStorage(imageDir.toString(),(entryFullName+".jpg"));
+            imageDir.append(context.getApplicationInfo().dataDir + "/app_imageDir/");
+            Bitmap bmp = loadImageFromStorage(imageDir.toString(), (entryFullName + ".jpg"));
 
 
             savedUser.setName(entryFullName.toString());
@@ -143,7 +134,7 @@ public class SavedUsersModel {
 
 
         return myResults;
-        //alertTV.setText(newMessage);
+
 
     }
 
@@ -152,33 +143,24 @@ public class SavedUsersModel {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
-    public int pixelsToDp(int dp){
+    public int pixelsToDp(int dp) {
         DisplayMetrics metrics = new DisplayMetrics();
-        ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);
         float logicalDensity = metrics.density;
-        int px = (int) Math.ceil(dp * logicalDensity);
-        return px;
+        return (int) Math.ceil(dp * logicalDensity);
     }
 
-    private Bitmap loadImageFromStorage(String path, String name)
-    {
+    private Bitmap loadImageFromStorage(String path, String name) {
 
         try {
-            File f=new File(path, name);
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            return b;
-        }
-        catch (FileNotFoundException e)
-        {
+            File f = new File(path, name);
+            return BitmapFactory.decodeStream(new FileInputStream(f));
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
 
     }
-
-
-
-
 
 
 }

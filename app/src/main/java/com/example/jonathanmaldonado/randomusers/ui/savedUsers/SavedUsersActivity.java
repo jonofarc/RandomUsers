@@ -1,12 +1,13 @@
 package com.example.jonathanmaldonado.randomusers.ui.savedUsers;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jonathanmaldonado.randomusers.R;
 import com.example.jonathanmaldonado.randomusers.data.SavedUser;
@@ -14,7 +15,7 @@ import com.example.jonathanmaldonado.randomusers.data.SavedUsersRecyclerViewAdap
 
 import java.util.List;
 
-public class SavedUsersActivity extends AppCompatActivity implements SavedUsersContract.View{
+public class SavedUsersActivity extends AppCompatActivity implements SavedUsersContract.View {
     SavedUsersPresenter savedUsersPresenter;
     TextView savedUsersTV;
 
@@ -26,8 +27,8 @@ public class SavedUsersActivity extends AppCompatActivity implements SavedUsersC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_users);
-        savedUsersPresenter= new SavedUsersPresenter(this);
-        savedUsersTV= (TextView) findViewById(R.id.saved_users_result_tv);
+        savedUsersPresenter = new SavedUsersPresenter(this);
+        savedUsersTV = (TextView) findViewById(R.id.saved_users_result_tv);
         savedUsersPresenter.getSavedUsers();
 
     }
@@ -42,9 +43,9 @@ public class SavedUsersActivity extends AppCompatActivity implements SavedUsersC
         return this;
     }
 
-    public void setRecyclerView(List<SavedUser> mDataset){
+    public void setRecyclerView(List<SavedUser> mDataset) {
 
-        if(mDataset.size()>0){
+        if (mDataset.size() > 0) {
             mRecyclerView = (RecyclerView) findViewById(R.id.myRecyclerView);
 
 
@@ -58,7 +59,7 @@ public class SavedUsersActivity extends AppCompatActivity implements SavedUsersC
 
             mAdapter = new SavedUsersRecyclerViewAdapter(mDataset, this);
             mRecyclerView.setAdapter(mAdapter);
-        }else{
+        } else {
             Toast.makeText(this, "No users saved on data base", Toast.LENGTH_SHORT).show();
         }
 

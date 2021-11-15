@@ -4,19 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.jonathanmaldonado.randomusers.db.DBHelper;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.jonathanmaldonado.randomusers.R;
+import com.example.jonathanmaldonado.randomusers.db.DBHelper;
 import com.example.jonathanmaldonado.randomusers.ui.savedUsers.SavedUsersActivity;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
-    final static private String TAG= MainActivity.class.getSimpleName()+"_TAG";
+    final static private String TAG = MainActivity.class.getSimpleName() + "_TAG";
     MainPresenter mainPresenter;
     ImageView profilePictureIV;
     TextView userNameTV;
@@ -24,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     TextView userEmailTV;
 
     private DBHelper helper;
-    private SQLiteDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +32,19 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         setContentView(R.layout.activity_main);
 
         helper = new DBHelper(this);
-        database = helper.getWritableDatabase();
+        SQLiteDatabase database = helper.getWritableDatabase();
 
         userNameTV = (TextView) findViewById(R.id.user_name_tv);
         userAddressTV = (TextView) findViewById(R.id.user_Address_tv);
         userEmailTV = (TextView) findViewById(R.id.user_email_tv);
         profilePictureIV = (ImageView) findViewById(R.id.profile_picture_iv);
-        mainPresenter= new MainPresenter(this);
+        mainPresenter = new MainPresenter(this);
 
         mainPresenter.getRandomUser();
 
     }
 
-    public void updateMainProfile(Bitmap bmp ,String name, String address, String email){
+    public void updateMainProfile(Bitmap bmp, String name, String address, String email) {
         Log.d(TAG, "updateMainProfile: updating the name------");
         userNameTV.setText(name);
         userAddressTV.setText(address);
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     }
 
     public void viewUsers(View view) {
-        Intent intent = new Intent(MainActivity.this , SavedUsersActivity.class);
+        Intent intent = new Intent(MainActivity.this, SavedUsersActivity.class);
         startActivity(intent);
     }
 }
